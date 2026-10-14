@@ -1,0 +1,28 @@
+{
+  "name": "@talocode/vaultlane",
+  "version": "0.1.0",
+  "description": "VaultLane plans a multi-token vault and a permissionless keeper intent. CLI, SDK, MCP, and a local API. It does not deploy a Solana program, mint a vault token, or move funds.",
+  "keywords": ["talocode", "vaultlane", "solana", "vault", "rebalance", "oracle", "keeper", "mcp"],
+  "author": "Talocode <updates@updates.teraai.chat>",
+  "homepage": "https://talocode.site",
+  "bugs": { "url": "https://github.com/talocode/vaultlane/issues" },
+  "type": "module",
+  "bin": {
+    "vaultlane": "./bin/vaultlane.mjs",
+    "talocode-vaultlane": "./bin/vaultlane.mjs"
+  },
+  "exports": {
+    ".": "./src/sdk.mjs"
+  },
+  "files": ["bin", "src", "examples", "README.md", "LICENSE"],
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talocode/vaultlane.git"
+  },
+  "scripts": {
+    "test": "node --test tests/engine.test.mjs",
+    "start": "node bin/vaultlane.mjs serve"
+  }
+}

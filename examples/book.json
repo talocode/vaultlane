@@ -1,0 +1,13 @@
+{
+  "lastRebalanceAt": 1759990000,
+  "balances": {
+    "So11111111111111111111111111111111111111112": 7,
+    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": 200,
+    "6ptxwABxQz8zMhwhiPeVgRgWjGMdVcEBFBv8v8C3ory": 10000
+  },
+  "quotes": {
+    "So11111111111111111111111111111111111111112": [{ "source": "manual", "usd": 100, "confBps": 20, "updatedAt": 1760000000 }],
+    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": [{ "source": "manual", "usd": 1, "confBps": 5, "updatedAt": 1760000000 }],
+    "6ptxwABxQz8zMhwhiPeVgRgWjGMdVcEBFBv8v8C3ory": [{ "source": "manual", "usd": 0.01, "confBps": 40, "updatedAt": 1760000000 }]
+  }
+}

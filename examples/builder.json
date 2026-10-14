@@ -1,0 +1,41 @@
+{
+  "name": "Builder basket",
+  "deviationBps": 100,
+  "cooldownSec": 3600,
+  "automation": true,
+  "assets": [
+    {
+      "symbol": "SOL",
+      "mint": "So11111111111111111111111111111111111111112",
+      "decimals": 9,
+      "targetBps": 5000,
+      "minOracles": 1,
+      "minConfBps": 1,
+      "confThreshBps": 200,
+      "maxStaleSec": 120,
+      "oracles": [{ "source": "manual", "weightBps": 10000, "required": true }]
+    },
+    {
+      "symbol": "USDC",
+      "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "decimals": 6,
+      "targetBps": 3000,
+      "minOracles": 1,
+      "minConfBps": 1,
+      "confThreshBps": 50,
+      "maxStaleSec": 120,
+      "oracles": [{ "source": "manual", "weightBps": 10000, "required": true }]
+    },
+    {
+      "symbol": "TCODE",
+      "mint": "6ptxwABxQz8zMhwhiPeVgRgWjGMdVcEBFBv8v8C3ory",
+      "decimals": 6,
+      "targetBps": 2000,
+      "minOracles": 1,
+      "minConfBps": 1,
+      "confThreshBps": 300,
+      "maxStaleSec": 120,
+      "oracles": [{ "source": "manual", "weightBps": 10000, "required": true }]
+    }
+  ]
+}
