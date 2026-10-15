@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "talocode-vaultlane"
-version = "0.1.0"
+version = "0.1.1"
 description = "VaultLane plans a multi-token vault and a permissionless keeper intent. It does not deploy a Solana program, mint a vault token, or move funds."
 readme = "README.md"
 license = "MIT"

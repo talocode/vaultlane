@@ -1,7 +1,7 @@
 import re
 from datetime import datetime, timezone
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 WEIGHT_TOTAL = 10_000
 LIMITS = {"maxAssets": 100, "maxOracles": 4, "maxManagers": 10}
 MINT = re.compile(r"^[1-9A-HJ-NP-Za-km-z]{32,44}$")

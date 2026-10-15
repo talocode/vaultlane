@@ -1,4 +1,4 @@
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 export const WEIGHT_TOTAL = 10_000;
 export const LIMITS = { maxAssets: 100, maxOracles: 4, maxManagers: 10 };
 
