@@ -1,0 +1,295 @@
+{
+  "pulledAt": "2026-10-15",
+  "creditUsd": 0.01,
+  "freeCreditsOnSignup": 100,
+  "minimumTopUpCredits": 500,
+  "sources": {
+    "page": "https://talocode.site/pricing.html",
+    "live": "https://api.talocode.site/api/v1/cloud/pricing",
+    "holdToEarn": "https://talocode.site/tcode.html"
+  },
+  "router": [
+    {
+      "model": "talocode/auto",
+      "perRequest": 4,
+      "per1kInput": 2,
+      "per1kOutput": 3
+    },
+    {
+      "model": "talocode/fast",
+      "perRequest": 2,
+      "per1kInput": 1,
+      "per1kOutput": 2
+    },
+    {
+      "model": "talocode/coding",
+      "perRequest": 5,
+      "per1kInput": 3,
+      "per1kOutput": 6
+    }
+  ],
+  "pageActions": [
+    {
+      "product": "agent_browser",
+      "action": "browser.check",
+      "credits": 5
+    },
+    {
+      "product": "agent_browser",
+      "action": "browser.screenshot",
+      "credits": 8
+    },
+    {
+      "product": "agent_browser",
+      "action": "browser.evidence",
+      "credits": 8
+    },
+    {
+      "product": "agent_browser",
+      "action": "browser.trace_report",
+      "credits": 15
+    },
+    {
+      "product": "tera_context",
+      "action": "context.capture",
+      "credits": 5
+    },
+    {
+      "product": "tera_context",
+      "action": "context.summarize",
+      "credits": 10
+    },
+    {
+      "product": "talocode_reach",
+      "action": "web.read",
+      "credits": 3
+    },
+    {
+      "product": "talocode_reach",
+      "action": "search.query",
+      "credits": 3
+    },
+    {
+      "product": "talocode_reach",
+      "action": "github.read",
+      "credits": 3
+    },
+    {
+      "product": "cliploop",
+      "action": "brief.generate",
+      "credits": 15
+    },
+    {
+      "product": "cliploop",
+      "action": "script.generate",
+      "credits": 15
+    },
+    {
+      "product": "cliploop",
+      "action": "campaign.create",
+      "credits": 50
+    },
+    {
+      "product": "cliploop",
+      "action": "video.render",
+      "credits": 200
+    },
+    {
+      "product": "cliploop",
+      "action": "campaign.package",
+      "credits": 400
+    },
+    {
+      "product": "tradia",
+      "action": "trade.import",
+      "credits": 3
+    },
+    {
+      "product": "tradia",
+      "action": "performance.analyze",
+      "credits": 20
+    },
+    {
+      "product": "tradia",
+      "action": "risk.report",
+      "credits": 35
+    },
+    {
+      "product": "codra",
+      "action": "repo.summary",
+      "credits": 50
+    },
+    {
+      "product": "codra",
+      "action": "explain",
+      "credits": 20
+    },
+    {
+      "product": "codra",
+      "action": "review",
+      "credits": 40
+    },
+    {
+      "product": "codra",
+      "action": "plan",
+      "credits": 40
+    },
+    {
+      "product": "worklane",
+      "action": "workflow.small",
+      "credits": 15
+    },
+    {
+      "product": "worklane",
+      "action": "workflow.large",
+      "credits": 40
+    },
+    {
+      "product": "signallane",
+      "action": "x.analyze",
+      "credits": 30
+    },
+    {
+      "product": "signallane",
+      "action": "x.content_plan",
+      "credits": 40
+    },
+    {
+      "product": "signallane",
+      "action": "x.post_drafts",
+      "credits": 40
+    },
+    {
+      "product": "signallane",
+      "action": "x.experiments",
+      "credits": 30
+    },
+    {
+      "product": "signallane",
+      "action": "x.report",
+      "credits": 60
+    },
+    {
+      "product": "invoicelane",
+      "action": "extract",
+      "credits": 20
+    },
+    {
+      "product": "invoicelane",
+      "action": "receipt.extract",
+      "credits": 20
+    },
+    {
+      "product": "invoicelane",
+      "action": "invoice.extract",
+      "credits": 30
+    },
+    {
+      "product": "invoicelane",
+      "action": "validate",
+      "credits": 10
+    },
+    {
+      "product": "invoicelane",
+      "action": "export.csv",
+      "credits": 5
+    },
+    {
+      "product": "ugclane",
+      "action": "strategy.generate",
+      "credits": 30
+    },
+    {
+      "product": "ugclane",
+      "action": "competitor.analyze",
+      "credits": 40
+    },
+    {
+      "product": "ugclane",
+      "action": "hooks.generate",
+      "credits": 20
+    },
+    {
+      "product": "ugclane",
+      "action": "scripts.generate",
+      "credits": 40
+    },
+    {
+      "product": "ugclane",
+      "action": "accounts.plan",
+      "credits": 30
+    },
+    {
+      "product": "ugclane",
+      "action": "calendar.generate",
+      "credits": 60
+    },
+    {
+      "product": "ugclane",
+      "action": "experiments.generate",
+      "credits": 30
+    },
+    {
+      "product": "ugclane",
+      "action": "report.generate",
+      "credits": 40
+    },
+    {
+      "product": "ugclane",
+      "action": "export.markdown",
+      "credits": 5
+    },
+    {
+      "product": "ugclane",
+      "action": "export.json",
+      "credits": 5
+    }
+  ],
+  "liveApi": {
+    "note": "Body returned by https://api.talocode.site/api/v1/cloud/pricing on 15 October 2026. VaultLane is not in it. This package does not invent a row.",
+    "requestId": "sl_req_f407ecbb96ae4dad",
+    "tera_api": {
+      "chat.completions": 3,
+      "writing.rewrite": 5,
+      "writing.draft": 10,
+      "coding.explain": 10,
+      "coding.review": 20,
+      "coding.write": 20
+    },
+    "searchlane": {
+      "searchlane.query": 5,
+      "searchlane.news": 8,
+      "searchlane.research": 30
+    },
+    "calclane": {
+      "calclane.evaluate": 1,
+      "calclane.dispatch": 1
+    }
+  },
+  "holdToEarn": [
+    {
+      "tier": "Explorer",
+      "minTcode": 1,
+      "monthlyCredits": 1000
+    },
+    {
+      "tier": "Builder",
+      "minTcode": 100,
+      "monthlyCredits": 10000
+    },
+    {
+      "tier": "Ecosystem",
+      "minTcode": 1000,
+      "monthlyCredits": 100000
+    },
+    {
+      "tier": "Partner",
+      "minTcode": 5000,
+      "monthlyCredits": 500000
+    }
+  ],
+  "localVaultlane": {
+    "credits": 0,
+    "note": "plan, quote, and keeper run locally. They do not call Talocode Cloud and they are not billed. VaultLane is not mounted on api.talocode.site."
+  }
+}

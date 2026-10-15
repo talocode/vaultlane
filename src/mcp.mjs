@@ -1,4 +1,5 @@
 import { keeperStep, planVault, VERSION } from "./engine.mjs";
+import { creditPrices } from "./prices.mjs";
 
 const tools = [
   {
@@ -29,6 +30,11 @@ const tools = [
       required: ["vault", "book"],
     },
   },
+  {
+    name: "vaultlane_prices",
+    description: "Read the Talocode credit catalog and the live pricing endpoint. Local VaultLane calls cost 0.",
+    inputSchema: { type: "object", properties: {} },
+  },
 ];
 
 function send(message) {
@@ -38,7 +44,7 @@ function send(message) {
 export function startMcp() {
   process.stdin.setEncoding("utf8");
   let buffer = "";
-  process.stdin.on("data", (chunk) => {
+  process.stdin.on("data", async (chunk) => {
     buffer += chunk;
     const lines = buffer.split("\n");
     buffer = lines.pop() || "";
@@ -58,7 +64,13 @@ export function startMcp() {
       } else if (method === "tools/call") {
         const name = params?.name;
         const args = params?.arguments || {};
-        const result = name === "vaultlane_plan" ? planVault(args) : name === "vaultlane_keeper" ? keeperStep(args) : { ok: false, errors: [`unknown tool ${name}`] };
+        const result = name === "vaultlane_plan"
+          ? planVault(args)
+          : name === "vaultlane_keeper"
+            ? keeperStep(args)
+            : name === "vaultlane_prices"
+              ? await creditPrices()
+              : { ok: false, errors: [`unknown tool ${name}`] };
         send({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: JSON.stringify(result) }], isError: result.ok === false } });
       } else if (id !== undefined) {
         send({ jsonrpc: "2.0", id, error: { code: -32601, message: "method not found" } });

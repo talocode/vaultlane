@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { keeperStep, planVault } from "../src/engine.mjs";
+import { creditPrices } from "../src/prices.mjs";
+import { startServer } from "../src/server.mjs";
 
 const NOW = 1760000000;
 
@@ -59,4 +61,25 @@ test("cooldown blocks a second intent", async () => {
   assert.equal(result.action, "wait");
   assert.match(result.blocked, /cooldown/);
   assert.deepEqual(result.receipt.trades, []);
+});
+
+test("local vaultlane calls cost zero and the live catalog has no vaultlane row", async () => {
+  const prices = await creditPrices();
+  assert.equal(prices.ok, true);
+  assert.equal(prices.catalog.localVaultlane.credits, 0);
+  assert.equal(prices.catalog.creditUsd, 0.01);
+  assert.equal(prices.vaultlaneOnLiveEndpoint, false);
+  assert.equal(prices.catalog.pulledAt, "2026-10-15");
+});
+
+test("execute is refused with HTTP 402 and no signature", async () => {
+  const server = startServer(8799);
+  await new Promise((resolve) => server.on("listening", resolve));
+  const response = await fetch("http://127.0.0.1:8799/execute", { method: "POST", body: "{}" });
+  const body = await response.json();
+  server.close();
+  assert.equal(response.status, 402);
+  assert.equal(body.signed, false);
+  assert.equal(body.creditsCharged, 0);
+  assert.equal(body.mint, "6ptxwABxQz8zMhwhiPeVgRgWjGMdVcEBFBv8v8C3ory");
 });

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.0,<1.29"]
+build-backend = "hatchling.build"
+
+[project]
+name = "talocode-vaultlane"
+version = "0.1.0"
+description = "VaultLane plans a multi-token vault and a permissionless keeper intent. It does not deploy a Solana program, mint a vault token, or move funds."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [{ name = "Talocode", email = "updates@updates.teraai.chat" }]
+keywords = ["talocode", "vaultlane", "solana", "vault", "rebalance", "oracle", "keeper"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://talocode.site"
+Repository = "https://github.com/talocode/vaultlane"
+Documentation = "https://github.com/talocode/vaultlane#readme"
+Pricing = "https://talocode.site/pricing.html"
+TCODE = "https://talocode.site/tcode.html"
+
+[project.scripts]
+vaultlane = "talocode_vaultlane.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["talocode_vaultlane"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"talocode_vaultlane/credit-prices.json" = "talocode_vaultlane/credit-prices.json"

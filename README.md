@@ -1,42 +1,56 @@
 # VaultLane
 
-VaultLane is the first on-chain vault layer for Talocode. It is the rule engine a keeper would run. It is not a deployed Solana program.
+VaultLane is the keeper rule layer for a multi-token Talocode vault. It checks weights, oracle confidence, drift, cooldown, and the keeper window. It writes an intent. It does not deploy a Solana program, mint a vault token, or send a swap.
 
-The shape comes from [Symmetry](https://docs.symmetry.fi/llms.txt): a basket of token mints, target weights in basis points that sum to 10,000, up to four oracle sources per asset, and a permissionless keeper that is allowed to act only when automation, the deviation band, the cooldown, and the price confidence all agree.
-
-Symmetry then does something this package does not. Their program `BASKT7aKd8n7ibpUbwLP3Wiyxyi3yoiXsxBk4Hpumate` holds the tokens, mints a vault token, runs a Dutch auction, and pays the keeper. VaultLane stops at the intent.
+The shape comes from [Symmetry](https://docs.symmetry.fi/llms.txt). Their program holds funds and pays keepers. This package stops before that.
 
 ```bash
-node bin/vaultlane.mjs plan --file=examples/builder.json
-node bin/vaultlane.mjs quote --file=examples/builder.json --book=examples/book.json --now=1760000000
+npm install -g @talocode/vaultlane
+vaultlane plan --file=examples/builder.json
+vaultlane quote --file=examples/builder.json --book=examples/book.json --now=1760000000
+vaultlane prices
 ```
 
-`quote` prints either `action: "intent"`, `action: "wait"`, or `action: "halt"`. An intent lists the buy and sell notionals in USD. Nothing is signed. Nothing is sent.
-
-The example basket is 50% SOL, 30% USDC, and 20% official $TCODE (`6ptxwABxQz8zMhwhiPeVgRgWjGMdVcEBFBv8v8C3ory`). The book uses manual prices on purpose. Jupiter's price feed for that mint is empty while it is still on the Orynth curve, and a missing required oracle halts the keeper instead of inventing a price.
-
-## What a later program would add
-
-- A vault account and a vault-token mint.
-- Deposits and withdrawals as the same rebalance intent, which is how Symmetry does it.
-- An on-chain oracle update before any swap.
-- A bounty a permissionless caller can claim after the work is done.
-
-Until that program exists, do not describe VaultLane as a place funds can be deposited.
-
-## Local API and MCP
+Python:
 
 ```bash
-node bin/vaultlane.mjs serve --port=8792
-node bin/vaultlane.mjs mcp
+pip install talocode-vaultlane
+vaultlane quote --file=builder.json --book=book.json
+vaultlane prices
 ```
-
-`GET /health`, `POST /plan`, and `POST /keeper` are local. They are not mounted on api.talocode.site.
 
 SDK:
 
 ```js
-import { keeperStep, planVault } from "@talocode/vaultlane";
+import { creditPrices, keeperStep, planVault } from "@talocode/vaultlane";
 ```
 
-The package is not on npm yet.
+```py
+from talocode_vaultlane import credit_prices, keeper_step, plan_vault
+```
+
+## What the sample book does
+
+The basket is 50% SOL, 30% USDC, and 20% official $TCODE (`6ptxwABxQz8zMhwhiPeVgRgWjGMdVcEBFBv8v8C3ory`). On the sample book the keeper says sell $200 of SOL, buy $100 of USDC, and buy $100 of $TCODE. `signed` is false.
+
+A stale required price halts the keeper. A cooldown makes it wait. Prices in the sample are manual. Jupiter's price feed for this mint is empty while it is still on the Orynth curve, and a missing required oracle is a halt, not a guess.
+
+## Credits
+
+`vaultlane prices` reads `data/credit-prices.json`, pulled 15 October 2026 from [talocode.site/pricing.html](https://talocode.site/pricing.html) and [the live endpoint](https://api.talocode.site/api/v1/cloud/pricing).
+
+- 1 credit = $0.01. Credits are product usage, not cash.
+- The public page lists 43 actions. The live body that day listed Tera, SearchLane, and CalcLane only.
+- VaultLane is not in that live body. Local `plan`, `quote`, and `keeper` cost 0 credits.
+- `POST /execute` on the local server returns HTTP 402. It does not charge, sign, or swap.
+
+```bash
+vaultlane mcp
+vaultlane serve --port=8792
+```
+
+`GET /health`, `GET /prices`, `POST /plan`, `POST /keeper`, and `POST /execute` are local. They are not mounted on api.talocode.site.
+
+## Not shipped
+
+A Solana program, a vault-token mint, a Dutch auction, and a keeper bounty. Do not describe this package as a place to deposit funds.

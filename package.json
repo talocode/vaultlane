@@ -14,7 +14,7 @@
   "exports": {
     ".": "./src/sdk.mjs"
   },
-  "files": ["bin", "src", "examples", "README.md", "LICENSE"],
+  "files": ["bin", "src", "data", "examples", "README.md", "LICENSE"],
   "license": "MIT",
   "engines": { "node": ">=18" },
   "repository": {
